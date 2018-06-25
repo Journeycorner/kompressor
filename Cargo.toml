@@ -5,3 +5,4 @@ authors = ["Florian Reisecker florian.reisecker@gmail.com"]
 
 [dependencies]
 yew = { git = "https://github.com/DenisKolodin/yew"}
+stdweb = "*"
