@@ -1,0 +1,10 @@
+FROM node:slim
+
+WORKDIR /usr/src/myapp
+RUN npm install brotli
+MKDIR raw
+MKDIR compressed
+COPY target/deploy /usr/src/myapp/raw
+COPY compress.js /usr/src/myapp
+RUN node compress.js
+COPY /usr/src/myapp/compressed /target/deploy

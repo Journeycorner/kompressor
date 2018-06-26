@@ -9,5 +9,10 @@ Local file compression powered by WebAssembly and Rust using the [Yew framework]
 ## Build 
 * ``cargo web build --target=wasm32-unknown-unknown``
 
-## Run
+## Develop
 * ``cargo web start --target=wasm32-unknown-unknown``
+
+## Deploy
+* ``cargo web deploy --target=wasm32-unknown-unknown``
+* ``docker build -t kompressor-nginx``
+* ``docker run --name kompressor-nginx -d -p 8080:80 kompressor-nginx``
