@@ -1,11 +1,35 @@
-extern crate kompressor;
-extern crate yew;
+#![feature(proc_macro)]
 
-use kompressor::Model;
-use yew::prelude::*;
+#[macro_use]
+extern crate stdweb;
+
+use stdweb::js_export;
+use stdweb::Reference;
+use stdweb::web::Blob;
+use stdweb::web::document;
+use stdweb::web::FileReader;
+use stdweb::web::FileReaderResult;
+use stdweb::web::IBlob;
+
+fn process(file_reader: FileReader) -> String {
+    match file_reader.result() {
+        Some(value) => match value {
+            FileReaderResult::String(value) => value,
+            _ => String::from("not a text"),
+        }
+        None => String::from("empty")
+    }
+}
+
+#[js_export]
+fn create_download_link(file_reader: FileReader) {
+    let data = process(file_reader);
+    js! {
+        download(@{data});
+    }
+}
 
 fn main() {
-    yew::initialize();
-    App::<Model>::new().mount_to_body();
-    yew::run_loop();
+    stdweb::initialize();
+    stdweb::event_loop();
 }

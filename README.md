@@ -1,5 +1,7 @@
 # Kompressor
-Local file compression powered by WebAssembly and Rust using the [Yew framework](https://github.com/DenisKolodin/yew).
+!!! WORK IN PROGRESS not much is working yet !!!
+
+Local file compression powered by WebAssembly and Rust.
 
 ## Development setup
 * [install Rust](https://www.rust-lang.org/en-US/install.html) 

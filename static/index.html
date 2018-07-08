@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Kompressor</title>
+</head>
+<body>
+<input type="file" id="file-input"/>
+<!--webkitdirectory mozdirectory-->
+<script src="kompressor.js"></script>
+<script>
+    var fileReader = new FileReader();
+    fileReader.onloadend = e => Rust.kompressor
+            .then(kompressor => kompressor.create_download_link(fileReader));
+
+    var fileInputElement = document.getElementById("file-input");
+    fileInputElement.addEventListener("change", e => {
+        for (file of fileInputElement.files) {
+            fileReader.readAsText(file);
+        }
+    });
+
+    function download(data) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/text;charset=utf-8,' + encodeURI(data));
+        element.setAttribute('download', "fileName.txt");
+        element.click();
+    }
+
+</script>
+</body>
+</html>
